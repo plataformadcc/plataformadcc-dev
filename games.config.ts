@@ -12,4 +12,10 @@ export const games: GameConfig[] = [
     description: 'Jogo de demonstracao para validar a estrutura.',
     compatibility: ['pc'],
   },
+  {
+    slug: 'pixel-duel',
+    name: 'Pixel Duel',
+    description: 'Joguinho de luta feito em JavaScript e HTML.',
+    compatibility: ['pc'],
+  },
 ];
