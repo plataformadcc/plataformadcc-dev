@@ -1,197 +1,117 @@
-# plataformaDCC-dev starter
+# plataformaDCC-dev
 
-Repositório base para devs integrarem e testarem jogos localmente antes de enviar para a plataforma oficial.
+A [PlataformaDCC](https://plataforma-dcc.vercel.app/) é um repositório de jogos voltados para crianças.
 
-Este starter possui apenas:
-- catalogo local estatico
-- pagina de listagem de jogos
-- pagina de execucao via iframe sandbox
+Este repositório é a base de integração para desenvolvedores testarem jogos localmente antes de submeter para a plataforma oficial.
 
-Nao possui Firebase, autenticacao, admin, parental, categorias ou classificacao indicativa.
+---
 
-## 1. Pre-requisitos
+## Pré-requisitos
 
 - Node.js 20+
 - npm 10+
 
-## 2. Como rodar
+---
 
-1. Instale as dependencias:
+## Passo a passo para submeter um jogo
+
+### 1. Fork
+
+Acesse [github.com/plataformadcc/plataformadcc-dev](https://github.com/plataformadcc/plataformadcc-dev) e clique em **Fork**.
+
+### 2. Clone e branch
+
+```bash
+git clone https://github.com/SEU-USUARIO/plataformadcc-dev.git
+cd plataformadcc-dev
+
+git checkout -b plataformadcc-[slug]-[seuNome]
+```
+
+Exemplos de nome de branch:
+```
+plataformadcc-space-shooter-joaosilva
+plataformadcc-multiplicacao-rapida-mariaoliveira
+```
+
+### 3. Instale as dependências
 
 ```bash
 npm install
 ```
 
-2. Suba o servidor local:
+### 4. Adicione seu jogo
 
-```bash
-npm run dev
+Crie a pasta do jogo em `public/_games/`:
+
+```
+public/_games/
+└── seu-jogo/
+    ├── index.html   ← entrypoint obrigatório
+    ├── assets/      ← scripts, imagens, estilos
+    └── README.md    ← objetivo pedagógico e controles
 ```
 
-3. Acesse:
+O **slug** é o nome da pasta: minúsculas, sem espaços, com hífens. Exemplo: `multiplicacao-rapida`.
 
-```text
-http://localhost:3000
-```
+### 5. Registre no catálogo
 
-## 3. Como adicionar seu jogo
-
-1. Crie a pasta do jogo em:
-
-```text
-public/_games/[slug]/
-```
-
-Exemplo:
-
-```text
-public/_games/meu-jogo/
-```
-
-2. Coloque o entrypoint em:
-
-```text
-public/_games/meu-jogo/index.html
-```
-
-3. Adicione o jogo no catalogo local em games.config.ts:
+Abra `games.config.ts` na raiz e adicione seu jogo:
 
 ```ts
-export const games = [
+export const games: GameConfig[] = [
+  // ... outros jogos
   {
-    slug: 'jogo-exemplo',
-    name: 'Jogo Exemplo',
-    description: 'Jogo de demonstracao para validar a estrutura.',
-    compatibility: ['pc'],
-  },
-  {
-    slug: 'meu-jogo',
-    name: 'Meu Jogo',
-    description: 'Descricao do meu jogo.',
-    compatibility: ['pc', 'cell'],
+    slug: 'seu-jogo',
+    name: 'Nome do Jogo',
+    description: 'Descrição curta do jogo.',
+    compatibility: ['pc'], // 'pc' | 'cell'
   },
 ]
 ```
 
-4. Abra seu jogo pela rota Nuxt:
-
-```text
-http://localhost:3000/games/meu-jogo
-```
-
-## 4. Estrutura minima
-
-```text
-plataformadcc-dev/
-|- public/
-|  |- _games/
-|  |  |- jogo-exemplo/
-|  |  |  |- index.html
-|- app/
-|  |- app.vue
-|  |- pages/
-|  |  |- index.vue
-|  |  |- games/
-|  |     |- [slug].vue
-|  |- components/
-|     |- GameCard.vue
-|     |- GameContainer.vue
-|- server/
-|  |- middleware/
-|     |- game-direct-access.ts
-|- games.config.ts
-|- nuxt.config.ts
-|- package.json
-|- tsconfig.json
-|- README.md
-```
-
-## 5. Contrato do jogo no iframe
-
-O jogo roda em iframe com sandbox. Considere as regras:
-
-- Deve funcionar com entrypoint local em /_games/[slug]/index.html
-- Nao deve depender de login da plataforma
-- Nao deve tentar acessar APIs privadas da plataforma
-- Deve tratar responsivamente desktop e mobile
-- Evite popup/download automatico sem acao do usuario
-
-Permissoes do iframe:
-- allow-scripts
-- allow-same-origin
-- allow-popups
-- allow-forms
-- allow-pointer-lock
-
-## 6. Acesso direto aos arquivos de jogo
-
-O middleware server/middleware/game-direct-access.ts redireciona acesso direto como:
-
-```text
-/_games/meu-jogo
-/_games/meu-jogo/
-/_games/meu-jogo/index.html
-```
-
-para:
-
-```text
-/games/meu-jogo
-```
-
-## 7. Checklist antes de submeter para a plataforma oficial
-
-- O jogo abre em /games/[slug]
-- O index.html do jogo esta em public/_games/[slug]/index.html
-- O slug no games.config.ts bate com o nome da pasta
-- O jogo funciona sem backend externo obrigatorio
-- O jogo nao quebra em tela pequena
-- O jogo nao depende de recursos removidos (auth/admin/parental)
-
-## 8. Jogo de referencia
-
-Use public/_games/jogo-exemplo como base. Ele contem instrucoes adicionais para padrao de estrutura do jogo.
-
-## 9. Fluxo de contribuicao
-
-### 9.1 Fork e branch
-
-1. Faca um **fork** deste repositório para a sua conta no GitHub
-2. Crie uma branch com o padrao:
-
-```text
-plataformadcc-[slug]-[nomedoDev]
-```
-
-Exemplos:
-
-```text
-plataformadcc-meu-jogo-joaosilva
-plataformadcc-space-shooter-mariaoliveira
-```
-
-3. Implemente seu jogo seguindo as secoes 3, 4 e 5 deste README
-4. Valide o checklist da secao 7
-5. Abra um **Pull Request** da sua branch para `main` neste repositório
-
-### 9.2 Resumo rapido
+### 6. Teste localmente
 
 ```bash
-# Clone seu fork
-git clone https://github.com/seu-usuario/plataformadcc-dev.git
-cd plataformadcc-dev
-
-# Crie a branch
-git checkout -b plataformadcc-meu-jogo-nomedoDev
-
-# Instale dependencias
-npm install
-
-# Rode localmente
 npm run dev
-
-# Commite e envie
-git add -A
-git commit -m "feat: adiciona jogo meu-jogo"
-git push origin plataformadcc-meu-jogo-nomedoDev
 ```
+
+Confirme que seu jogo aparece no catálogo e roda em `http://localhost:3000/games/seu-jogo`.
+
+### 7. Commit e Pull Request
+
+```bash
+git add -A
+git commit -m "feat: adiciona jogo seu-jogo"
+git push origin plataformadcc-seu-jogo-seuNome
+```
+
+Abra um **Pull Request** da sua branch para `main` neste repositório.
+
+---
+
+## Contrato do jogo no iframe
+
+O jogo roda em iframe sandbox. Certifique-se de que:
+
+- O entrypoint é `public/_games/[slug]/index.html`
+- Funciona sem backend externo obrigatório
+- Não coleta dados pessoais nem usa trackers
+- É responsivo (desktop e mobile)
+
+---
+
+## Checklist antes de abrir o PR
+
+- [ ] Pasta criada em `public/_games/[slug]/`
+- [ ] `index.html` presente e abrindo sem erros
+- [ ] Slug em `games.config.ts` bate com o nome da pasta
+- [ ] Jogo funciona em `http://localhost:3000/games/[slug]`
+- [ ] `README.md` dentro da pasta com objetivo pedagógico e controles
+- [ ] Branch com padrão `plataformadcc-[slug]-[seuNome]`
+
+---
+
+## Referência
+
+Abra `http://localhost:3000/games/jogo-exemplo` para ver um exemplo completo do fluxo de submissão.
