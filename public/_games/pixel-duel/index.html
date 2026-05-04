@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Pixel Duel</title>
+</head>
+
+<body>
+    <div class="container">
+        <section id="startScreen" class="start-screen">
+            <h1>Pixel Duel</h1>
+            <p>Este jogo é para 2 jogadores no mesmo teclado.</p>
+
+            <div class="mode-selector">
+                <p class="mode-title">Escolha o modo:</p>
+                <label class="mode-option">
+                    <input type="radio" name="gameMode" value="md3" checked>
+                    MD3
+                </label>
+                <label class="mode-option">
+                    <input type="radio" name="gameMode" value="md5">
+                    MD5
+                </label>
+                <label class="mode-option">
+                    <input type="radio" name="gameMode" value="livre">
+                    Livre
+                </label>
+            </div>
+
+            <div class="time-selector">
+                <p class="mode-title">Tempo por rodada:</p>
+                <label class="mode-option">
+                    <input type="radio" name="roundTime" value="30" checked>
+                    30s
+                </label>
+                <label class="mode-option">
+                    <input type="radio" name="roundTime" value="60">
+                    60s
+                </label>
+                <label class="mode-option">
+                    <input type="radio" name="roundTime" value="90">
+                    90s
+                </label>
+            </div>
+
+            <div class="controls-grid">
+                <div class="controls-card">
+                    <h2>Jogador 1 (Azul)</h2>
+                    <ul>
+                        <li>A / D: mover</li>
+                        <li>W: pular</li>
+                        <li>Espaço: atacar</li>
+                    </ul>
+                </div>
+
+                <div class="controls-card">
+                    <h2>Jogador 2 (Vermelho)</h2>
+                    <ul>
+                        <li>← / →: mover</li>
+                        <li>↑: pular</li>
+                        <li>↓: atacar</li>
+                    </ul>
+                </div>
+            </div>
+
+            <button id="startButton" class="start-button" type="button">
+                Iniciar Partida (2 Jogadores)
+            </button>
+        </section>
+
+        <div class="bar-container">
+            <div class="player">
+                <div class="score-tag">P1: <span id="playerScore">0</span></div>
+                <div class="player-bar"></div>
+                <div id="playerHealth"></div>
+            </div>
+            <div id="timer" class="time-bar">
+
+            </div>
+            <div class="enemy">
+                <div class="score-tag">P2: <span id="enemyScore">0</span></div>
+                <div class="enemy-bar"></div>
+                <div id="enemyHealth"></div>
+            </div>
+        </div>
+        <div id="resultText" class="result"></div>
+        <canvas></canvas>
+    </div>
+    <script src="js/utils.js"></script>
+    <script src="js/classes.js"></script>
+    <script src="index.js"></script>
+</body>
+
+</html>
