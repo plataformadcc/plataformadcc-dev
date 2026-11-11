@@ -1,6 +1,6 @@
 # plataformaDCC-dev
 
-A [PlataformaDCC](https://plataforma-dcc.vercel.app/) é um repositório de jogos voltados para crianças.
+A [PlataformaDCC](https://www.plataformadcc.com.br/) é um repositório de jogos.
 
 Este repositório é a base de integração para desenvolvedores testarem jogos localmente antes de submeter para a plataforma oficial.
 
