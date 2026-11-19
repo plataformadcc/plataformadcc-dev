@@ -112,6 +112,14 @@
       </div>
 
       <div class="card">
+        <h2>0. Conta de desenvolvedor <span class="badge">pode fazer em paralelo</span></h2>
+        <p>
+          Crie uma conta em <code>plataformadcc.com.br</code>, abra <strong>Menu → Área Dev</strong> e
+          envie o pedido de acesso. Sem o perfil de desenvolvedor aprovado, a plataforma não aceita envio de jogos.
+        </p>
+      </div>
+
+      <div class="card">
         <h2>1. Fork + Branch <span class="badge">primeiro passo</span></h2>
         <ol>
           <li>Acesse <code>github.com/plataformadcc/plataformadcc-dev</code> e clique em <strong>Fork</strong>.</li>
@@ -149,7 +157,7 @@ cd plataformadcc-dev</code></pre>
     slug: 'seu-jogo',          // mesmo nome da pasta em public/_games/
     name: 'Nome do Jogo',
     description: 'Descrição curta do jogo.',
-    compatibility: ['pc'],     // 'pc' | 'cell' | 'tablet'
+    compatibility: ['pc'],     // 'pc' e/ou 'cell'
   },
 ]</code></pre>
       </div>
@@ -163,9 +171,10 @@ npm run dev</code></pre>
           e roda corretamente em <code>http://localhost:3000/games/seu-jogo</code>.
         </p>
         <div class="warn">
-          ⚠️ O jogo roda em <strong>iframe sandbox</strong>. Ele não tem acesso a cookies,
-          localStorage da plataforma ou APIs de autenticação. Certifique-se de que seu jogo
-          funciona nesse contexto antes de abrir o PR.
+          ⚠️ O jogo roda em <strong>iframe sandbox</strong>, com a mesma política de segurança da
+          produção: tudo precisa estar dentro da pasta do jogo (nada de CDN ou Google Fonts), sem
+          <code>&lt;script&gt;</code> inline, <code>onclick</code> no HTML ou <code>eval</code>.
+          Deixe o console aberto (F12): se aparecer <code>Refused to ...</code>, corrija antes de abrir o PR.
         </div>
       </div>
 
@@ -175,8 +184,19 @@ npm run dev</code></pre>
 git commit -m "feat: adiciona jogo seu-jogo"
 git push origin plataformadcc-seu-jogo-seuNome</code></pre>
         <p style="margin-top:10px">
-          No GitHub, abra um <strong>Pull Request</strong> da sua branch para <code>main</code>
-          no repositório <code>plataformadcc/plataformadcc-dev</code>.
+          No GitHub, abra um <strong>Pull Request</strong> da sua branch para a branch
+          <code>submissoes</code> (e não para <code>main</code>) no repositório
+          <code>plataformadcc/plataformadcc-dev</code>. O PR não é mesclado: ele serve para a equipe revisar o código.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>6. Envie na plataforma e acompanhe <span class="badge">publicação</span></h2>
+        <p>
+          Em <strong>Área Dev → Publicar novo jogo</strong>, preencha os dados do jogo com o
+          <strong>mesmo slug</strong>, envie a imagem de capa e cole o <strong>link do seu PR</strong>.
+          O painel mostra as etapas: <em>Enviado → Em homologação → Aprovado em homologação → Publicado</em>.
+          Se o jogo for recusado, o painel mostra em qual etapa e por quê.
         </p>
       </div>
 
@@ -187,10 +207,12 @@ git push origin plataformadcc-seu-jogo-seuNome</code></pre>
           <li><code>index.html</code> presente e abrindo sem erros</li>
           <li>Entrada adicionada em <code>games.config.ts</code></li>
           <li>Jogo funciona localmente em <code>/games/[slug]</code></li>
-          <li>Jogo não depende de backend externo para rodar</li>
+          <li>Nenhum <code>Refused to ...</code> no console</li>
+          <li>Jogo não depende de backend externo nem de arquivos de outros domínios</li>
           <li>Sem coleta de dados pessoais ou trackers</li>
-          <li><code>README.md</code> dentro da pasta com objetivo e controles</li>
+          <li><code>README.md</code> dentro da pasta com objetivo, controles e créditos/licenças</li>
           <li>Branch com padrão <code>plataformadcc-[slug]-[seuNome]</code></li>
+          <li>PR aberto para a branch <code>submissoes</code></li>
         </ul>
       </div>
 
